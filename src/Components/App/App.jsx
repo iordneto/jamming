@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
 
-const App = (props) => {
+const App = () => {
   const [searchResults, setSearchResults] = useState([
     {
       id: "1",
@@ -63,6 +63,10 @@ const App = (props) => {
     }
   };
 
+  const updatePlaylistName = (name) => {
+    setPlaylistName(name);
+  };
+
   return (
     <div>
       <h1>
@@ -73,6 +77,7 @@ const App = (props) => {
         <div className="App-playlist">
           <SearchResults results={searchResults} addTrack={addTrack} />
           <Playlist
+            onNameChange={updatePlaylistName}
             name={playlistName}
             tracks={playlistTracks}
             removeTrack={removeTrack}
