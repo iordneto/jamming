@@ -3,10 +3,10 @@ import "./SearchResults.css";
 
 import TrackList from "../TrackList/TrackList";
 
-const SearchResults = () => (
+const SearchResults = ({ results }) => (
   <div className="SearchResults">
     <h2>Results</h2>
-    <TrackList />
+    <TrackList list={results} />
   </div>
 );
 

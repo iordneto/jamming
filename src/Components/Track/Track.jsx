@@ -4,19 +4,18 @@ import "./Track.css";
 const Track = (props) => {
   const renderAction = () => {
     return props.isRemoval ? (
-      <button class="Track-action">-</button>
+      <button className="Track-action">-</button>
     ) : (
-      <button class="Track-action">+</button>
+      <button className="Track-action">+</button>
     );
   };
 
   return (
-    <div class="Track">
-      <div class="Track-information">
-        <h3>Track Name{/*<!-- track name will go here -->*/}</h3>
+    <div className="Track">
+      <div className="Track-information">
+        <h3>{props.name}</h3>
         <p>
-          Artist
-          {/*<!-- track artist will go here--> | <!-- track album will go here -->*/}
+          {props.artist} - {props.album}
         </p>
       </div>
       {renderAction()}

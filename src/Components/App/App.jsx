@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
 
-function App() {
+const App = (props) => {
+  const [searchResults, setSearchResults] = useState([
+    {
+      id: "1",
+      name: "Surf",
+      artist: "Mac Miller",
+      album: "Surf",
+    },
+    {
+      id: "2",
+      name: "Sel Care",
+      artist: "Mac Miller",
+      album: "Self Care",
+    },
+    {
+      id: "3",
+      name: "Nikes on My Feet",
+      artist: "Mac Miller",
+      album: "Blue Slide Park",
+    },
+  ]);
+
   return (
     <div>
       <h1>
@@ -14,12 +35,12 @@ function App() {
       <div className="App">
         <SearchBar />
         <div className="App-playlist">
-          <SearchResults />
+          <SearchResults results={searchResults} />
           <Playlist />
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default App;
