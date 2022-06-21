@@ -8,54 +8,9 @@ import Playlist from "../Playlist/Playlist";
 import Spotify from "../../util/Spotify";
 
 const App = () => {
-  const [searchResults, setSearchResults] = useState([
-    {
-      id: "1",
-      name: "Surf",
-      artist: "Mac Miller",
-      album: "Surf",
-      uri: "https://google.com",
-    },
-    {
-      id: "2",
-      name: "Sel Care",
-      artist: "Mac Miller",
-      album: "Self Care",
-      uri: "https://google.com",
-    },
-    {
-      id: "3",
-      name: "Nikes on My Feet",
-      artist: "Mac Miller",
-      album: "Blue Slide Park",
-      uri: "https://google.com",
-    },
-  ]);
-
-  const [playlistName, setPlaylistName] = useState("PlayList do Iord");
-  const [playlistTracks, setPlaylistTracks] = useState([
-    {
-      id: "12",
-      name: "Boogie Naipe",
-      artist: "Mano Brown",
-      album: "Boogie",
-      uri: "https://google.com",
-    },
-    {
-      id: "5",
-      name: "Vida Loka Pt.1",
-      artist: "Racionais Mc's",
-      album: "VDL",
-      uri: "https://google.com",
-    },
-    {
-      id: "6",
-      name: "A favela venceu",
-      artist: "Djonga",
-      album: "Favelado",
-      uri: "https://google.com",
-    },
-  ]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [playlistName, setPlaylistName] = useState("New Playlist");
+  const [playlistTracks, setPlaylistTracks] = useState([]);
 
   const addTrack = (trackId) => {
     if (!playlistTracks.find((t) => t.id === trackId)) {
@@ -74,9 +29,11 @@ const App = () => {
     setPlaylistName(name);
   };
 
-  const savePlaylist = () => {
+  const savePlaylist = async () => {
     const trackURIs = playlistTracks.map((track) => track.uri);
-    //save
+    await Spotify.savePlaylist(playlistName, trackURIs);
+    setPlaylistName("New Playlist");
+    setPlaylistTracks([]);
   };
 
   const search = async (searchTerm) => {

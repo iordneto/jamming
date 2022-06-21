@@ -1,3 +1,5 @@
+import { useImperativeHandle } from "react";
+
 let accessToken;
 const CLIENT_ID = "c24db6a6bcd74093838ab5704575123c";
 const REDIRECT_URI = "http://localhost:3000/";
@@ -40,6 +42,42 @@ const Spotify = {
           uri: track.uri,
         }));
       });
+  },
+
+  async savePlaylist(name, tracks) {
+    if (!name || !tracks || tracks.length === 0) return;
+
+    const accessToken = Spotify.getAccessToken();
+    const headers = { Authorization: `Bearer ${accessToken}` };
+
+    //get User Id
+    const response = await fetch("https://api.spotify.com/v1/me", {
+      headers: headers,
+    });
+
+    const user = await response.json();
+
+    //post a new playlist with name to the current Spotify account
+    const postPlaylist = await fetch(
+      `https://api.spotify.com/v1/users/${user.id}/playlists`,
+      {
+        headers: headers,
+        method: "POST",
+        body: JSON.stringify({
+          name: name,
+        }),
+      }
+    );
+
+    const playlist = await postPlaylist.json();
+    const postTracksToPlaylist = await fetch(
+      `https://api.spotify.com/v1/playlists/${playlist.id}/tracks`,
+      {
+        headers: headers,
+        method: "POST",
+        body: JSON.stringify({ uris: tracks }),
+      }
+    );
   },
 };
 
