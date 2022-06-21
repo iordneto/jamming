@@ -12,18 +12,21 @@ const App = () => {
       name: "Surf",
       artist: "Mac Miller",
       album: "Surf",
+      uri: "https://google.com",
     },
     {
       id: "2",
       name: "Sel Care",
       artist: "Mac Miller",
       album: "Self Care",
+      uri: "https://google.com",
     },
     {
       id: "3",
       name: "Nikes on My Feet",
       artist: "Mac Miller",
       album: "Blue Slide Park",
+      uri: "https://google.com",
     },
   ]);
 
@@ -34,18 +37,21 @@ const App = () => {
       name: "Boogie Naipe",
       artist: "Mano Brown",
       album: "Boogie",
+      uri: "https://google.com",
     },
     {
       id: "5",
       name: "Vida Loka Pt.1",
       artist: "Racionais Mc's",
       album: "VDL",
+      uri: "https://google.com",
     },
     {
       id: "6",
       name: "A favela venceu",
       artist: "Djonga",
       album: "Favelado",
+      uri: "https://google.com",
     },
   ]);
 
@@ -67,20 +73,30 @@ const App = () => {
     setPlaylistName(name);
   };
 
+  const savePlaylist = () => {
+    const trackURIs = playlistTracks.map((track) => track.uri);
+    //save
+  };
+
+  const search = (searchTerm) => {
+    console.log(searchTerm);
+  };
+
   return (
     <div>
       <h1>
         Ja<span className="highlight">mmm</span>ing
       </h1>
       <div className="App">
-        <SearchBar />
+        <SearchBar onSearch={search} />
         <div className="App-playlist">
           <SearchResults results={searchResults} addTrack={addTrack} />
           <Playlist
-            onNameChange={updatePlaylistName}
             name={playlistName}
             tracks={playlistTracks}
             removeTrack={removeTrack}
+            onNameChange={updatePlaylistName}
+            onSave={savePlaylist}
           />
         </div>
       </div>
