@@ -1,20 +1,35 @@
 import React from "react";
 import "./Track.css";
 
-const Track = ({ isRemoval, addTrack, id, name, artist, album }) => {
+const Track = ({
+  isRemoval,
+  addTrack,
+  removeTrack,
+  id,
+  name,
+  artist,
+  album,
+}) => {
   const renderAction = () => {
     return isRemoval ? (
-      <button className="Track-action">-</button>
+      <button className="Track-action" onClick={handleRemoveClick}>
+        -
+      </button>
     ) : (
-      <button className="Track-action" onClick={handleClick}>
+      <button className="Track-action" onClick={handleAddClick}>
         +
       </button>
     );
   };
 
-  const handleClick = (e) => {
+  const handleAddClick = (e) => {
     e.preventDefault();
     addTrack(id);
+  };
+
+  const handleRemoveClick = (e) => {
+    e.preventDefault();
+    removeTrack(id);
   };
 
   return (

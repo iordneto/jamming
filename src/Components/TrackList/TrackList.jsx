@@ -3,7 +3,7 @@ import "./TrackList.css";
 
 import Track from "../Track/Track";
 
-const TrackList = ({ list, addTrack, isRemoval }) => (
+const TrackList = ({ list, addTrack, removeTrack, isRemoval }) => (
   <div className="TrackList">
     {list &&
       list.length &&
@@ -13,6 +13,7 @@ const TrackList = ({ list, addTrack, isRemoval }) => (
           id={track.id}
           isRemoval={isRemoval}
           addTrack={addTrack}
+          removeTrack={removeTrack}
           name={track.name}
           artist={track.artist}
           album={track.album}
