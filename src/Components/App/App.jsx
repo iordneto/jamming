@@ -5,6 +5,8 @@ import SearchBar from "../SearchBar/SearchBar";
 import SearchResults from "../SearchResults/SearchResults";
 import Playlist from "../Playlist/Playlist";
 
+import Spotify from "../../util/Spotify";
+
 const App = () => {
   const [searchResults, setSearchResults] = useState([
     {
@@ -63,7 +65,6 @@ const App = () => {
   };
 
   const removeTrack = (trackId) => {
-    console.log(trackId);
     if (playlistTracks.find((t) => t.id === trackId)) {
       setPlaylistTracks([...playlistTracks.filter((t) => t.id !== trackId)]);
     }
@@ -78,8 +79,9 @@ const App = () => {
     //save
   };
 
-  const search = (searchTerm) => {
-    console.log(searchTerm);
+  const search = async (searchTerm) => {
+    const results = await Spotify.search(searchTerm);
+    setSearchResults(results);
   };
 
   return (
