@@ -27,6 +27,42 @@ const App = (props) => {
     },
   ]);
 
+  const [playlistName, setPlaylistName] = useState("PlayList do Iord");
+  const [playlistTracks, setPlaylistTracks] = useState([
+    {
+      id: "4",
+      name: "Boogie Naipe",
+      artist: "Mano Brown",
+      album: "Boogie",
+    },
+    {
+      id: "5",
+      name: "Vida Loka Pt.1",
+      artist: "Racionais Mc's",
+      album: "VDL",
+    },
+    {
+      id: "6",
+      name: "A favela venceu",
+      artist: "Djonga",
+      album: "Favelado",
+    },
+  ]);
+
+  const addTrack = async (trackId) => {
+    console.log(trackId);
+    if (!playlistTracks.find((t) => t.id === trackId)) {
+      console.log("a");
+      const track = searchResults.find((result) => result.id === trackId);
+      await setPlaylistTracks([...playlistTracks, track]);
+      console.log(playlistTracks);
+    }
+  };
+
+  const removeTrack = (track) => {
+    setPlaylistTracks([...playlistTracks.filter((t) => t.id !== track.id)]);
+  };
+
   return (
     <div>
       <h1>
@@ -35,8 +71,8 @@ const App = (props) => {
       <div className="App">
         <SearchBar />
         <div className="App-playlist">
-          <SearchResults results={searchResults} />
-          <Playlist />
+          <SearchResults results={searchResults} addTrack={addTrack} />
+          <Playlist name={playlistName} tracks={playlistTracks} />
         </div>
       </div>
     </div>
