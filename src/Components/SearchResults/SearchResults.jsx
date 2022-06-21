@@ -1,8 +1,13 @@
 import React from "React";
+import "./SearchResults.css";
+
+import TrackList from "../TrackList/TrackList";
 
 const SearchResults = () => (
   <div className="SearchResults">
     <h2>Results</h2>
-    {/*Add a TrackList component*/}
+    <TrackList />
   </div>
 );
+
+export default SearchResults;
